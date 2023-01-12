@@ -13,42 +13,58 @@ class AddressBookContact {
 
     get firstName() { return this._firstName; }
     set firstName(firstName) {
-        this._firstName = firstName;
+        let firstNameRegex = RegExp('^[A-Z][a-z]{2,}$');
+        if(firstNameRegex.test(firstName)) this._firstName = firstName;
+        else throw 'FirstName is Incorrect!'
     }
 
     get lastName() { return this._lastName; }
     set lastName(lastName) {
-        this._lastName = lastName;
+        let lastNameRegex = RegExp('^[A-Z][a-z]{2,}$');
+        if(lastNameRegex.test(lastName)) this._lastName = lastName;
+        else throw 'LastName is Incorrect!'
     }
 
     get address() { return this._address; }
     set address(address) {
-        this._address = address;
+        let addressRegex = RegExp('^[A-Z][a-z]{3,}$');
+        if(addressRegex.test(address)) this._address = address;
+        else throw 'Address is Incorrect!'
     }
 
     get city() { return this._city; }
     set city(city) {
-        this._city = city;
+        let cityRegex = RegExp('^[A-Z][a-z]{3,}$');
+        if(cityRegex.test(city)) this._city = city;
+        else throw 'City is Incorrect!'
     }
 
     get state() { return this._state; }
     set state(state) {
-        this._state = state;
+        let stateRegex = RegExp('^[A-Z][a-z]{3,}$');
+        if(stateRegex.test(state)) this._state = state;
+        else throw 'State is Incorrect!'
     }
 
     get zip() { return this._zip; }
     set zip(zip) {
-        this._zip = zip;
+        let zipRegex = RegExp('(^[1-9][0-9]{5}|(^[1-9][0-9]{2}[\\s][0-9]{3}))$');
+        if(zipRegex.test(zip)) this._zip = zip;
+        else throw 'Zip is Incorrect!'
     }
 
     get phone() { return this._phone; }
     set phone(phone) {
-        this._phone = phone;
+        let phoneRegex = RegExp('^([1-9]|[1-9][0-9])[\\s]([7-9][0-9]{9})$');
+        if(phoneRegex.test(phone)) this._phone = phone;
+        else throw 'Phone is Incorrect!'
     }
 
     get email() { return this._email; }
     set email(email) {
-        this._email = email;
+        let emailRegex = RegExp('^([a-z 0-9]{3,}|[a-z 0-9]{3,}[-|+|-|.][a-z 0-9]{1,})[@][a-z 0-9]{1,}[.]([com|net|co]{2,3}|[com|net|co]{2,3}[.][au|in|com]{2,3})$')
+        if(emailRegex.test(email)) this._email = email;
+        else throw 'Email is Incorrect!'
     }
 
     toString() {
@@ -57,16 +73,62 @@ class AddressBookContact {
         "Email = " + this.email; 
     }
 }
-let newAddressBookContact = new AddressBookContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", 444102, 8806187589, "pr@gmail.com");
+let newAddressBookContact = new AddressBookContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "pr@gmail.com");
 console.log(newAddressBookContact.toString());
 
 let addressBookContact = new AddressBookContact();
-addressBookContact.firstName = "Pratik";
-addressBookContact.lastName = "Kamble";
-addressBookContact.address = "Sanglood";
-addressBookContact.city = "Akola";
-addressBookContact.state = "Maharashtra";
-addressBookContact.zip = 444102;
-addressBookContact.phone = 8806187554;
-addressBookContact.email = "p@gmail.com";
-console.log(addressBookContact.toString());
+try{
+    addressBookContact.firstName = "ratik";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.lastName = "amble";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try {
+    addressBookContact.address = "San";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.city = "Ako";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.state = "Mah";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.zip = "44410";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.phone = "91 880618";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
+
+try{
+    addressBookContact.email = "prashikgmail.com";
+    console.log(addressBookContact.toString());
+} catch(e) {
+    console.error(e);
+}
