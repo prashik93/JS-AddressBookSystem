@@ -1,4 +1,5 @@
 
+const prompt = require("prompt-sync")();
 let firstNameRegex = new RegExp('^[A-Z][a-z]{2,}$');
 let lastNameRegex = new RegExp('^[A-Z][a-z]{2,}$');
 let addressRegex = new RegExp('^[A-Z][a-z]{2,}$');
@@ -6,8 +7,7 @@ let cityRegex = new RegExp('^[A-Z][a-z]{2,}$');
 let stateRegex = new RegExp('^[A-Z][a-z]{2,}$');
 let zipRegex = new RegExp('(^[1-9][0-9]{5}|(^[1-9][0-9]{2}[\\s][0-9]{3}))$')
 let phoneRegex = new RegExp('^([1-9]|[1-9][0-9])[\\s]([7-9][0-9]{9})$');
-let emailRegex = new RegExp('^([a-z 0-9]{3,}|[a-z 0-9]{3,}[-|+|-|.][a-z 0-9]{1,})[@][a-z 0-9]{1,}[.]([com|net|co]{2,3}|[com|net|co]{2,3}[.][au|in|com]{2,3})$')
-
+let emailRegex = new RegExp('^([a-z 0-9]{3,}|[a-z 0-9]{3,}[-|+|-|.][a-z 0-9]{1,})[@][a-z 0-9]{1,}[.]([com|net|co]{2,3}|[com|net|co]{2,3}[.][au|in|com]{2,3})$');
 class ContactDetails{
 
     constructor(...params){
@@ -17,7 +17,7 @@ class ContactDetails{
         this.city = params[3];
         this.state = params[4];
         this.zip = params[5];
-        this.phoneNumber = params[6];
+        this.phone = params[6];
         this.email = params[7];
     }
     get firstName() {return this._firstName};
@@ -84,4 +84,62 @@ AddContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", 
 AddContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
 AddContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
 
-addressBookContactArray.forEach(contact => console.log(contact.toString()));
+function FindAndEditContactDetails() {
+    try{
+        let usrInput = prompt("Enter Name To Search And Edit Contact Details :- ");
+        let flag = true;
+        addressBookContactArray.filter(contact => {
+            if(contact.firstName == usrInput) {
+                console.log("\nContact Before Edit : " + contact.toString());
+                while(flag) {
+                    let usrChoice = parseInt(prompt("What do you want to Edit\n0.Exit\n1.FirstName\n2.LastName\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone\n8.Email\nYour Choice : "));
+                    switch(usrChoice) {
+                        case 1:
+                            let EditFirstName = prompt("Edit First Name : ");
+                            contact.firstName = EditFirstName;
+                            break;
+                        case 2:
+                            let EditLastName = prompt("Edit Last Name : ");
+                            contact.lastName = EditLastName;
+                            break;
+                        case 3:
+                            let EditAddress = prompt("Edit Address : ");
+                            contact.address = EditAddress;
+                            break;     
+                        case 4:
+                            let EditCity = prompt("Edit City : ");
+                            contact.city = EditCity;
+                            break;     
+                        case 5:
+                            let EditState = prompt("Edit State : ");
+                            contact.state = EditState;
+                            break; 
+                        case 6:
+                            let EditZip = prompt("Edit Zip : ");
+                            contact.zip = EditZip;
+                            break; 
+                        case 7:
+                            let EditPhone = prompt("Edit Phone : ");
+                            contact.phone = EditPhone;
+                            break; 
+                        case 8:
+                            let EditEmail = prompt("Edit Email : ");
+                            contact.email = EditEmail;
+                            break; 
+                        case 0:
+                            console.log("\nContact After Edit : " + contact.toString());
+                            flag = false; 
+                            return;
+                        default :
+                            console.log("Please Give Valid Input...");
+                            break;
+                    }
+                }
+            };
+        });
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+FindAndEditContactDetails();
