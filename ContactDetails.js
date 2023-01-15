@@ -69,9 +69,19 @@ class ContactDetails{
     }
 }
 
-try {
-    let newAddressBookContact = new ContactDetails("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
-    console.log(newAddressBookContact.toString());
-} catch(e) {
-    console.error(e);
+let addressBookContactArray = new Array();
+function AddContact(firstName, lastName, address, city, state, zip, phone, email) {
+    try{
+        let newContactObj = new ContactDetails(firstName, lastName, address, city, state, zip, phone, email);
+        addressBookContactArray.push(newContactObj);
+    } catch(e) {
+        console.error(e);
+    }
 }
+
+AddContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
+AddContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
+AddContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
+AddContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
+
+addressBookContactArray.forEach(contact => console.log(contact.toString()));
