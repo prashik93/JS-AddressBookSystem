@@ -7,7 +7,7 @@ function userOptions() {
     while(true) {
         console.log("\nWhat do you want to do?\n1.Add Contact\n2.Show Contact\n3.Edit Contact\n4.Delete Contact\
                     \n5.Get Count Of Contacts\n6.Find By FirstName\n7.Search In City Or State\n8.View By City Or State\
-                    \n9.Count Contacts By City Or State\n0.Exit");
+                    \n9.Count Contacts By City Or State\n10.Sort Contact Details By Person's Name\n0.Exit");
         let usrChoice = parseInt(prompt("Your Choice :- "));
         switch(usrChoice) {
             case 1:
@@ -40,6 +40,9 @@ function userOptions() {
                 break;
             case 9:
                 countByCityOrState();
+                break;
+            case 10:
+                sortContactDetailsByPersonsName();
                 break;
             case 0:
                 return;
@@ -263,6 +266,26 @@ function countByCityOrState() {
                 let countOfContactsInState = addressBookContactArray.filter((contact) => contact.state == usrState).reduce(count => count+1, 0);
                 console.log("\nCount Of Contact Details With Respective State i.e " + usrState + " Are : " + countOfContactsInState);
                 break;
+            case 0:
+                return;
+            default :
+                console.log("Please Give Valid Input...");
         }
     }
+}
+
+function sortContactDetailsByPersonsName() {
+    addressBookContactArray.sort((a,b) => {
+        let fa = a.firstName.toLowerCase(),
+            fb = b.firstName.toLowerCase();
+
+        if(fa < fb) {
+            return -1;
+        }
+        if(fa > fb) {
+            return 1;
+        }
+        return 0;
+    });
+    console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
