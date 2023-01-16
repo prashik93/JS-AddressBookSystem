@@ -8,6 +8,7 @@ let stateRegex = new RegExp('^[A-Z][a-z]{2,}$');
 let zipRegex = new RegExp('(^[1-9][0-9]{5}|(^[1-9][0-9]{2}[\\s][0-9]{3}))$')
 let phoneRegex = new RegExp('^([1-9]|[1-9][0-9])[\\s]([7-9][0-9]{9})$');
 let emailRegex = new RegExp('^([a-z 0-9]{3,}|[a-z 0-9]{3,}[-|+|-|.][a-z 0-9]{1,})[@][a-z 0-9]{1,}[.]([com|net|co]{2,3}|[com|net|co]{2,3}[.][au|in|com]{2,3})$');
+
 class ContactDetails{
 
     constructor(...params){
@@ -70,7 +71,7 @@ class ContactDetails{
 }
 
 let addressBookContactArray = new Array();
-function AddContact(firstName, lastName, address, city, state, zip, phone, email) {
+function addContact(firstName, lastName, address, city, state, zip, phone, email) {
     try{
         let newContactObj = new ContactDetails(firstName, lastName, address, city, state, zip, phone, email);
         addressBookContactArray.push(newContactObj);
@@ -79,67 +80,88 @@ function AddContact(firstName, lastName, address, city, state, zip, phone, email
     }
 }
 
-AddContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
-AddContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
-AddContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
-AddContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
+addContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
+addContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
+addContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
+addContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
 
-function FindAndEditContactDetails() {
-    try{
-        let usrInput = prompt("Enter Name To Search And Edit Contact Details :- ");
-        let flag = true;
-        addressBookContactArray.filter(contact => {
-            if(contact.firstName == usrInput) {
-                console.log("\nContact Before Edit : " + contact.toString());
-                while(flag) {
-                    let usrChoice = parseInt(prompt("What do you want to Edit\n0.Exit\n1.FirstName\n2.LastName\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone\n8.Email\nYour Choice : "));
-                    switch(usrChoice) {
-                        case 1:
-                            let EditFirstName = prompt("Edit First Name : ");
-                            contact.firstName = EditFirstName;
-                            break;
-                        case 2:
-                            let EditLastName = prompt("Edit Last Name : ");
-                            contact.lastName = EditLastName;
-                            break;
-                        case 3:
-                            let EditAddress = prompt("Edit Address : ");
-                            contact.address = EditAddress;
-                            break;     
-                        case 4:
-                            let EditCity = prompt("Edit City : ");
-                            contact.city = EditCity;
-                            break;     
-                        case 5:
-                            let EditState = prompt("Edit State : ");
-                            contact.state = EditState;
-                            break; 
-                        case 6:
-                            let EditZip = prompt("Edit Zip : ");
-                            contact.zip = EditZip;
-                            break; 
-                        case 7:
-                            let EditPhone = prompt("Edit Phone : ");
-                            contact.phone = EditPhone;
-                            break; 
-                        case 8:
-                            let EditEmail = prompt("Edit Email : ");
-                            contact.email = EditEmail;
-                            break; 
-                        case 0:
-                            console.log("\nContact After Edit : " + contact.toString());
-                            flag = false; 
-                            return;
-                        default :
-                            console.log("Please Give Valid Input...");
-                            break;
-                    }
-                }
-            };
-        });
+function findContact() {
+    let usrInput = prompt("Enter Name To Search Contact Details :- ");
+    let contact;
+    addressBookContactArray.filter(contactDetails => {
+        if(contactDetails.firstName == usrInput) {
+            console.log("Contact Found : ");
+            console.log(contactDetails);
+            contact = contactDetails;
+        }
+    }); 
+    return contact;
+}
+
+function editContact() {
+    try {
+        let contact = findContact();
+        while(true) {
+            let usrChoice = parseInt(prompt("What do you want to Edit\n0.Exit\n1.FirstName\n2.LastName\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone\n8.Email\nYour Choice : "));
+            switch(usrChoice) {
+                case 1:
+                    let EditFirstName = prompt("Edit First Name : ");
+                    contact.firstName = EditFirstName;
+                    break;
+                case 2:
+                    let EditLastName = prompt("Edit Last Name : ");
+                    contact.lastName = EditLastName;
+                    break;
+                case 3:
+                    let EditAddress = prompt("Edit Address : ");
+                    contact.address = EditAddress;
+                    break;     
+                case 4:
+                    let EditCity = prompt("Edit City : ");
+                    contact.city = EditCity;
+                    break;     
+                case 5:
+                    let EditState = prompt("Edit State : ");
+                    contact.state = EditState;
+                    break; 
+                case 6:
+                    let EditZip = prompt("Edit Zip : ");
+                    contact.zip = EditZip;
+                    break; 
+                case 7:
+                    let EditPhone = prompt("Edit Phone : ");
+                    contact.phone = EditPhone;
+                    break; 
+                case 8:
+                    let EditEmail = prompt("Edit Email : ");
+                    contact.email = EditEmail;
+                    break; 
+                case 0:
+                    console.log("\nContact After Edit : ");
+                    console.log(contact.toString());
+                    return;
+                default :
+                    console.log("Please Give Valid Input...");
+                    break;
+            }
+        }
     } catch(e) {
         console.error(e);
     }
 }
 
-FindAndEditContactDetails();
+editContact();
+
+function deleteContact() {
+    try {
+        let contact = findContact();
+        const arrayIndex = addressBookContactArray.findIndex((contactDetails) => contactDetails.firstName == contact.firstName);
+        addressBookContactArray.splice(arrayIndex, 1);
+        console.log("Elements In An Array After Delete Operation : ");
+        console.log(addressBookContactArray);
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+deleteContact();
