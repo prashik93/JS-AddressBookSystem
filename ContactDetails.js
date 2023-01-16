@@ -74,7 +74,13 @@ let addressBookContactArray = new Array();
 function addContact(firstName, lastName, address, city, state, zip, phone, email) {
     try{
         let newContactObj = new ContactDetails(firstName, lastName, address, city, state, zip, phone, email);
-        addressBookContactArray.push(newContactObj);
+        let filterContact = addressBookContactArray.filter(contactDetails => contactDetails.firstName == newContactObj.firstName);
+        if(filterContact.length <= 0) {
+            addressBookContactArray.push(newContactObj);
+        } else {
+            console.log("Contact Details Already Exist, Please Add A New One...");
+        }
+        
     } catch(e) {
         console.error(e);
     }
@@ -84,6 +90,9 @@ addContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "
 addContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
 addContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
 addContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
+addContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
+
+console.log(addressBookContactArray);
 
 function findContact() {
     let usrInput = prompt("Enter Name To Search Contact Details :- ");
@@ -150,7 +159,7 @@ function editContact() {
     }
 }
 
-editContact();
+// editContact();
 
 function deleteContact() {
     try {
@@ -164,7 +173,7 @@ function deleteContact() {
     }
 }
 
-deleteContact();
+// deleteContact();
 
 function getCountOfContactDetails() {
     let count = 0;
