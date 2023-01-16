@@ -1,10 +1,13 @@
 const contactDetails = require('./ContactDetails');
 const prompt = require("prompt-sync")();
 let addressBookContactArray = new Array();
+let addressBookMap = new Map();
 
 function userOptions() {
     while(true) {
-        console.log("\nWhat do you want to do?\n1.Add Contact\n2.Show Contact\n3.Edit Contact\n4.Delete Contact\n5.Get Count Of Contacts\n6.Search In City Or State\n7.Find By FirstName\n0.Exit");
+        console.log("\nWhat do you want to do?\n1.Add Contact\n2.Show Contact\n3.Edit Contact\n4.Delete Contact\
+                    \n5.Get Count Of Contacts\n6.Find By FirstName\n7.Search In City Or State\n8.View By City Or State\
+                    \n0.Exit");
         let usrChoice = parseInt(prompt("Your Choice :- "));
         switch(usrChoice) {
             case 1:
@@ -12,6 +15,7 @@ function userOptions() {
                 addContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
                 addContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
                 addContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
+                addContact("Pratik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
                 break;
             case 2:
                 showContact();
@@ -26,10 +30,13 @@ function userOptions() {
                 getCountOfContactDetails();
                 break;
             case 6:
-                searchInCityOrState();
+                findContact();
                 break;
             case 7:
-                findContact();
+                searchInCityOrState();
+                break;
+            case 8:
+                viewByCityOrState();
                 break;
             case 0:
                 return;
@@ -172,6 +179,63 @@ function searchInCityOrState() {
                     return console.log("No Contact Details Found...");
                 }
                 console.log("Persons in City " + usrState + " : " + state);
+                break;
+            case 0:
+                return;
+            default : 
+                console.log("Please Give Valid Input...")
+        }
+    }
+}
+
+function viewByCity() {
+    let cityNameArray = new Array();
+    
+    addressBookContactArray.forEach(contact => cityNameArray.push(contact.city));
+    for(let i = 0; i < cityNameArray.length; i++) {
+        let contactsByCityArray = new Array();
+        addressBookContactArray.filter(contactDetails => {
+            if(contactDetails.city == cityNameArray[i]) {
+                contactsByCityArray.push(contactDetails);
+            }
+            addressBookMap.set(cityNameArray[i], contactsByCityArray)
+        }); 
+    }
+    
+    for(let key of addressBookMap.keys()) {
+        console.log(key + " => " + addressBookMap.get(key) + "\n");
+    }
+}
+
+function viewByState() {
+    let stateNameArray = new Array();
+    
+    addressBookContactArray.forEach(contact => stateNameArray.push(contact.state));
+    for(let i = 0; i < stateNameArray.length; i++) {
+        let contactsByStateArray = new Array();
+        addressBookContactArray.filter(contactDetails => {
+            if(contactDetails.state == stateNameArray[i]) {
+                contactsByStateArray.push(contactDetails);
+            }
+            addressBookMap.set(stateNameArray[i], contactsByStateArray)
+        }); 
+    }
+    
+    for(let key of addressBookMap.keys()) {
+        console.log(key + " => " + addressBookMap.get(key) + "\n");
+    }
+}
+
+function viewByCityOrState() {
+    while(true) {
+        console.log("\nPlease Choose\n1.View By City\n2.View By State\n0.Exit");
+        let num = parseInt(prompt("Your Choice :- "));
+        switch(num) {
+            case 1:
+                viewByCity();
+                break;
+            case 2:
+                viewByState();
                 break;
             case 0:
                 return;
