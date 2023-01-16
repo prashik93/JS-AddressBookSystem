@@ -7,7 +7,8 @@ function userOptions() {
     while(true) {
         console.log("\nWhat do you want to do?\n1.Add Contact\n2.Show Contact\n3.Edit Contact\n4.Delete Contact\
                     \n5.Get Count Of Contacts\n6.Find By FirstName\n7.Search In City Or State\n8.View By City Or State\
-                    \n9.Count Contacts By City Or State\n10.Sort Contact Details By Person's Name\n0.Exit");
+                    \n9.Count Contacts By City Or State\n10.Sort Contact Details By Person's Name\n11.Sort Contact Details By City Name\
+                    \n12.Sort Contact Details By State Name\n13.Sort Contact Details By ZipCode\n0.Exit");
         let usrChoice = parseInt(prompt("Your Choice :- "));
         switch(usrChoice) {
             case 1:
@@ -43,6 +44,15 @@ function userOptions() {
                 break;
             case 10:
                 sortContactDetailsByPersonsName();
+                break;
+            case 11:
+                sortContactDetailsByCityName();
+                break;
+            case 12:
+                sortContactDetailsByStateName();
+                break;
+            case 13:
+                sortContactDetailsByZipCode();
                 break;
             case 0:
                 return;
@@ -275,7 +285,7 @@ function countByCityOrState() {
 }
 
 function sortContactDetailsByPersonsName() {
-    addressBookContactArray.sort((a,b) => {
+    addressBookContactArray.sort((a, b) => {
         let fa = a.firstName.toLowerCase(),
             fb = b.firstName.toLowerCase();
 
@@ -287,5 +297,53 @@ function sortContactDetailsByPersonsName() {
         }
         return 0;
     });
+    console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
+}
+
+function sortContactDetailsByCityName() {
+    addressBookContactArray.sort((a, b) => {
+        let fa = a.city.toLowerCase(),
+            fb = b.city.toLowerCase();
+
+        if(fa < fb) {
+            return -1;
+        }
+        if(fa > fb) {
+            return 1;
+        }
+        return 0;
+    })
+    console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
+}
+
+function sortContactDetailsByStateName() {
+    addressBookContactArray.sort((a, b) => {
+        let fa = a.state.toLowerCase(),
+            fb = b.state.toLowerCase();
+        
+        if(fa < fb) {
+            return -1
+        }
+        if(fa > fb) {
+            return 1
+        }
+        return 0;
+    })
+    console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
+}
+
+function sortContactDetailsByZipCode() {
+    addressBookContactArray.sort((a, b) => {
+        let fa = a.zip.toLowerCase(),
+            fb = b.zip.toLowerCase();
+        
+        if(fa < fb) {
+            return -1
+        }
+        if(fa > fb) {
+            return 1
+        }
+        return 0;
+    })
     console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
