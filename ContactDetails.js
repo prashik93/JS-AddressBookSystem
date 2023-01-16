@@ -165,3 +165,10 @@ function deleteContact() {
 }
 
 deleteContact();
+
+function getCountOfContactDetails() {
+    const count = addressBookContactArray.reduce((contactDetails) => contactDetails+1, 0);
+    console.log("Count Of Contact Details :- " + count);
+}
+
+getCountOfContactDetails();
