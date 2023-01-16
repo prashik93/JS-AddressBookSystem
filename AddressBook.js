@@ -7,7 +7,7 @@ function userOptions() {
     while(true) {
         console.log("\nWhat do you want to do?\n1.Add Contact\n2.Show Contact\n3.Edit Contact\n4.Delete Contact\
                     \n5.Get Count Of Contacts\n6.Find By FirstName\n7.Search In City Or State\n8.View By City Or State\
-                    \n0.Exit");
+                    \n9.Count Contacts By City Or State\n0.Exit");
         let usrChoice = parseInt(prompt("Your Choice :- "));
         switch(usrChoice) {
             case 1:
@@ -37,6 +37,9 @@ function userOptions() {
                 break;
             case 8:
                 viewByCityOrState();
+                break;
+            case 9:
+                countByCityOrState();
                 break;
             case 0:
                 return;
@@ -241,6 +244,25 @@ function viewByCityOrState() {
                 return;
             default : 
                 console.log("Please Give Valid Input...")
+        }
+    }
+}
+
+function countByCityOrState() {
+    while(true) {
+        console.log("\nPlease Choose\n1.Count By City\n2.Count By State\n0.Exit");
+        let usrChoice = parseInt(prompt("Your Choice : "));
+        switch(usrChoice) {
+            case 1:
+                let usrCity = prompt("Enter City Name To Get Count Of Contact Details : ");
+                let countOfContactsInCity = addressBookContactArray.filter((contact) => contact.city == usrCity).reduce(count => count+1, 0);
+                console.log("\nCount Of Contact Details With Respective City i.e " + usrCity + " Are : " + countOfContactsInCity);
+                break;
+            case 2:
+                let usrState = prompt("Enter State Name To Get Count Of Contact Details : ");
+                let countOfContactsInState = addressBookContactArray.filter((contact) => contact.state == usrState).reduce(count => count+1, 0);
+                console.log("\nCount Of Contact Details With Respective State i.e " + usrState + " Are : " + countOfContactsInState);
+                break;
         }
     }
 }
