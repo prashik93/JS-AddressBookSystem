@@ -13,7 +13,7 @@ function userOptions() {
         switch(usrChoice) {
             case 1:
                 addContact("Prashik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
-                addContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Maharashtra", "444 100", "91 8983253934", "ratnadip@gmail.com");
+                addContact("Ratnadip", "Bharde", "Tiwsa", "Amravati", "Chandigarh", "444 100", "91 8983253934", "ratnadip@gmail.com");
                 addContact("Priyanka", "Shinde", "Pune", "Pune", "Maharashtra", "444 105", "91 9999999999", "priyanka@gmail.com");
                 addContact("Mazhar", "Ali", "Hyderabad", "Hyderabad", "Telangana", "444 512", "91 8125629427", "mazhar@gmail.com");
                 addContact("Pratik", "Kamble", "Sanglood", "Akola", "Maharashtra", "444 102", "91 8806187589", "prashik@gmail.com");
@@ -285,65 +285,29 @@ function countByCityOrState() {
 }
 
 function sortContactDetailsByPersonsName() {
-    addressBookContactArray.sort((a, b) => {
-        let fa = a.firstName.toLowerCase(),
-            fb = b.firstName.toLowerCase();
-
-        if(fa < fb) {
-            return -1;
-        }
-        if(fa > fb) {
-            return 1;
-        }
-        return 0;
-    });
+    addressBookContactArray.sort((key1, key2) => 
+                                (key1.firstName.toLowerCase()).localeCompare(key2.firstName.toLowerCase()));
+                                
     console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
 
 function sortContactDetailsByCityName() {
-    addressBookContactArray.sort((a, b) => {
-        let fa = a.city.toLowerCase(),
-            fb = b.city.toLowerCase();
-
-        if(fa < fb) {
-            return -1;
-        }
-        if(fa > fb) {
-            return 1;
-        }
-        return 0;
-    })
+    addressBookContactArray.sort((key1, key2) => 
+                                (key1.city.toLowerCase()).localeCompare(key2.city.toLowerCase()));
+                        
     console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
 
 function sortContactDetailsByStateName() {
-    addressBookContactArray.sort((a, b) => {
-        let fa = a.state.toLowerCase(),
-            fb = b.state.toLowerCase();
-        
-        if(fa < fb) {
-            return -1
-        }
-        if(fa > fb) {
-            return 1
-        }
-        return 0;
-    })
+    addressBookContactArray.sort((key1, key2) => 
+                                (key1.state.toLowerCase()).localeCompare(key2.state.toLowerCase()));
+
     console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
 
 function sortContactDetailsByZipCode() {
-    addressBookContactArray.sort((a, b) => {
-        let fa = a.zip.toLowerCase(),
-            fb = b.zip.toLowerCase();
-        
-        if(fa < fb) {
-            return -1
-        }
-        if(fa > fb) {
-            return 1
-        }
-        return 0;
-    })
+    addressBookContactArray.sort((key1, key2) =>
+                                (key1.zip.toLowerCase()).localeCompare(key2.zip.toLowerCase()));
+
     console.log("\nTo Check Please Enter Option 2 i.e Show Contact...")
 }
